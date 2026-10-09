@@ -88,3 +88,59 @@ console.log(totalPesanan, uangPas, jumlahMember, dapatDiskon);
 // || berarti cukup salah satu syarat benar.
 // Contoh: sudahMember && totalPesanan > 100000 membutuhkan keduanya benar,
 // sedangkan sudahMember || totalPesanan > 100000 cukup salah satu benar.
+
+
+const namaBarang = "Nasi Goreng";
+const hargaSatuan = 20000;
+const TARIF_PAJAK = 0.11;
+
+let jumlahBeli = 3;
+let uangDibayar = 75000;
+
+let subtotal = hargaSatuan * jumlahBeli;
+let pajak = subtotal * TARIF_PAJAK;
+let totalBayar = subtotal + pajak;
+
+// Operator penugasan ringkas
+totalBayar += 0;
+subtotal -= 0;
+
+// Menghitung kembalian
+let kembalian = uangDibayar - totalBayar;
+
+// Variabel Boolean
+let uangCukup = uangDibayar >= totalBayar;
+let gratisKantong = subtotal >= 100000 || jumlahBeli >= 5;
+let jumlahGenap = jumlahBeli % 2 === 0;
+
+// Contoh penggunaan tanda kurung
+let contohDenganKurung = (hargaSatuan + 5000) * 2;
+let contohTanpaKurung = hargaSatuan + 5000 * 2;
+
+console.log("Barang          :", namaBarang);
+console.log("Jumlah          :", jumlahBeli);
+console.log("Subtotal        :", hargaSatuan * jumlahBeli);
+console.log("Pajak (11%)     :", pajak);
+console.log("Total bayar     :", totalBayar);
+console.log("Uang dibayar    :", uangDibayar);
+console.log("Kembalian       :", kembalian);
+console.log("Uang cukup?     :", uangCukup);
+console.log("Gratis kantong? :", gratisKantong);
+console.log("Jumlah genap?   :", jumlahGenap);
+
+console.log("Dengan kurung   :", contohDenganKurung);
+console.log("Tanpa kurung    :", contohTanpaKurung);
+
+// Jawaban pertanyaan:
+// 1. Uang cukup artinya uang yang saya bayar cukup untuk membayar
+//    semua pesanan. Hasilnya true karena uang saya lebih banyak
+//    daripada total yang harus dibayar.
+//
+// 2. Sebelum diganti, gratisKantong memakai || dan hasilnya false
+//    karena subtotal belum 100000 dan jumlah beli belum 5.
+//    Kalau || diganti &&, hasilnya tetap false karena kedua syarat
+//    sama-sama belum terpenuhi.
+//
+// 3. Dengan kurung hasilnya 50000, karena harga ditambah 5000
+//    dulu baru dikali 2. Tanpa kurung hasilnya 30000 karena
+//    perkalian dikerjakan lebih dulu.
