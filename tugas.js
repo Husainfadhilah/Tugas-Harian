@@ -144,3 +144,17 @@ console.log("Tanpa kurung    :", contohTanpaKurung);
 // 3. Dengan kurung hasilnya 50000, karena harga ditambah 5000
 //    dulu baru dikali 2. Tanpa kurung hasilnya 30000 karena
 //    perkalian dikerjakan lebih dulu.
+
+
+let totalMenit = 250;
+
+let jam = Math.floor(totalMenit / 60);
+let menit = totalMenit % 60;
+
+console.log(jam + " jam " + menit + " menit");
+
+// / adalah pembagian. 250 / 60 menghasilkan 4.1666.... Karena jam harus berupa angka bulat, kita menggunakan Math.floor() untuk membulatkannya ke bawah menjadi 4.
+
+// % adalah operator sisa bagi. 250 % 60 menghasilkan 10, yaitu sisa menit setelah mengambil 4 jam penuh.
+
+// Jadi, 250 menit = 4 jam 10 menit.
