@@ -53,4 +53,38 @@ console.log(totalPesanan, uangPas, jumlahMember, dapatDiskon);
 
 
 // JAWABAN SAYA
-// 1.FIX : masing masing produk harusnya 
+// 1.FIX : masing masing produk harusnya di beri tanda * sebagai tanda perkalian
+// let totalPesanan = hargaKopi * 2 + hargaTeh * 2;
+ 
+// FIX: Ubah uangDiterima menjadi angka agar bisa dibandingkan dengan ===.
+// let uangPas = Number(uangDiterima) === totalPesanan;
+
+
+// FIX: Gunakan += agar nilai jumlahMember benar-benar bertambah.
+// jumlahMember += 1;
+
+
+// FIX: Gunakan || karena syaratnya menggunakan ATAU.
+// let dapatDiskon = sudahMember || totalPesanan > 100000;
+
+// console.log(totalPesanan, uangPas, jumlahMember, dapatDiskon);
+
+// Jawaban pertanyaan:
+// 1. Kesalahan pertama adalah rumus total pesanan yang belum mengalikan
+//    jumlah masing-masing produk; diperbaiki dengan mengalikan harga kopi
+//    dan teh masing-masing dengan 2.
+// 2. Kesalahan kedua adalah membandingkan string dengan angka menggunakan
+//    ===; diperbaiki dengan mengubah uangDiterima menjadi angka menggunakan Number().
+// 3. Kesalahan ketiga adalah jumlahMember + 1 hanya menghitung hasil tanpa
+//    menyimpan perubahan; diperbaiki menggunakan += 1.
+// 4. Kesalahan keempat adalah menggunakan && padahal syarat diskon memakai
+//    ATAU; diperbaiki menggunakan ||.
+//
+// Jika == diganti === tanpa mengubah uangDiterima, hasilnya false karena
+// uangDiterima berupa string, sedangkan totalPesanan berupa angka.
+// Number(uangDiterima) mengubah string "51000" menjadi angka 51000.
+//
+// && berarti kedua syarat harus benar.
+// || berarti cukup salah satu syarat benar.
+// Contoh: sudahMember && totalPesanan > 100000 membutuhkan keduanya benar,
+// sedangkan sudahMember || totalPesanan > 100000 cukup salah satu benar.
