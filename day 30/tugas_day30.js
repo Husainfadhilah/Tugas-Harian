@@ -134,4 +134,184 @@ console.log(diskon, potonganMember, totalAkhir);
 
 // 4. Kondisi voucher menggunakan operator penugasan =, bukan operator perbandingan; perbaikannya adalah mengganti (kodeVoucher = "") menjadi (kodeVoucher === "").
 
-// 5. Kondisi pembayaran menggunakan > sehingga uang yang sama dengan totalAkhir dianggap kurang; perbaikannya adalah mengganti > menjadi >= agar pembayaran yang sama atau lebih besar dianggap lunas.
+// 5. Kondisi pembayaran menggunakan > sehingga uang yang sama dengan totalAkhir dianggap kurang; perbaikannya adalah mengganti > menjadi >= agar pembayaran yang sama atau lebih besar dianggap lunas
+
+
+// ===================================
+// LANGKAH 3: BIKIN KASIR SENDIRI
+// ===================================
+
+// 1. Data awal
+let kasirNamaPelanggan = "Rina";
+let kasirTotalBelanja = 90000;
+let kasirHari = "sabtu";
+let kasirJenisMember = "silver";
+let kasirKodeVoucher = "SENJA10";
+let kasirUangBayar = 100000;
+
+// 2. Diskon berdasarkan total belanja
+let kasirDiskon;
+
+if (kasirTotalBelanja >= 100000) {
+  kasirDiskon = kasirTotalBelanja * 0.15;
+} else if (kasirTotalBelanja >= 50000) {
+  kasirDiskon = kasirTotalBelanja * 0.10;
+} else if (kasirTotalBelanja >= 25000) {
+  kasirDiskon = kasirTotalBelanja * 0.05;
+} else {
+  kasirDiskon = 0;
+}
+
+// 3. Potongan member
+let kasirPotonganMember;
+
+if (kasirJenisMember === "gold") {
+  kasirPotonganMember = 5000;
+} else if (kasirJenisMember === "silver") {
+  kasirPotonganMember = 2000;
+} else {
+  kasirPotonganMember = 0;
+}
+
+// 4. Promo hari menggunakan switch
+let kasirPromoHari;
+
+switch (kasirHari) {
+  case "jumat":
+    kasirPromoHari = 3000;
+    break;
+
+  case "sabtu":
+  case "minggu":
+    kasirPromoHari = 5000;
+    break;
+
+  default:
+    kasirPromoHari = 0;
+    break;
+}
+
+// 5. Validasi nama menggunakan Truthy/Falsy
+let kasirStatusNama;
+
+if (kasirNamaPelanggan) {
+  kasirStatusNama = `Pelanggan: ${kasirNamaPelanggan}`;
+} else {
+  kasirStatusNama = "Nama pelanggan belum diisi";
+}
+
+// 6. Voucher menggunakan Truthy/Falsy
+let kasirPotonganVoucher;
+let kasirStatusVoucher;
+
+if (kasirKodeVoucher) {
+  kasirPotonganVoucher = 2000;
+  kasirStatusVoucher = `Voucher dipakai: ${kasirKodeVoucher}`;
+} else {
+  kasirPotonganVoucher = 0;
+  kasirStatusVoucher = "Voucher tidak dipakai";
+}
+
+// 7. Menghitung total akhir
+let kasirTotalAkhir =
+  kasirTotalBelanja -
+  kasirDiskon -
+  kasirPotonganMember -
+  kasirPromoHari -
+  kasirPotonganVoucher;
+
+// 8. Status pembayaran
+let kasirStatusPembayaran;
+
+if (kasirUangBayar > kasirTotalAkhir) {
+  kasirStatusPembayaran = `Lunas, kembalian: Rp${kasirUangBayar - kasirTotalAkhir}`;
+} else if (kasirUangBayar === kasirTotalAkhir) {
+  kasirStatusPembayaran = "Lunas (uang pas)";
+} else {
+  kasirStatusPembayaran = `Kurang: Rp${kasirTotalAkhir - kasirUangBayar}`;
+}
+
+// 9. Mencetak hasil menggunakan template literal
+console.log(`
+ KASIR KEDAI KOPI
+${kasirStatusNama}
+Total belanja: Rp${kasirTotalBelanja}
+Diskon: Rp${kasirDiskon}
+Potongan member: Rp${kasirPotonganMember}
+Promo hari: Rp${kasirPromoHari}
+${kasirStatusVoucher}
+Potongan voucher: Rp${kasirPotonganVoucher}
+Total akhir: Rp${kasirTotalAkhir}
+Uang bayar: Rp${kasirUangBayar}
+Status: ${kasirStatusPembayaran}
+
+`);
+
+
+// 10. UJI 3 SKENARIO
+
+
+// Skenario 1:
+// Nama: Rina, belanja: 90000, hari: sabtu
+// Member: silver, voucher: SENJA10, bayar: 100000
+// Hasil:
+// Pelanggan: Rina
+// Diskon: Rp9000
+// Potongan member: Rp2000
+// Promo hari: Rp5000
+// Voucher dipakai: SENJA10
+// Potongan voucher: Rp2000
+// Total akhir: Rp72000
+// Status: Lunas, kembalian: Rp28000
+
+// Skenario 2:
+// Ubah data awal menjadi:
+// kasirNamaPelanggan = "";
+// kasirTotalBelanja = 120000;
+// kasirHari = "jumat";
+// kasirJenisMember = "gold";
+// kasirKodeVoucher = "";
+// kasirUangBayar = 94000;
+//
+// Hasil setelah program dijalankan:
+// Nama pelanggan belum diisi
+// Diskon: Rp18000
+// Potongan member: Rp5000
+// Promo hari: Rp3000
+// Voucher tidak dipakai
+// Potongan voucher: Rp0
+// Total akhir: Rp94000
+// Status: Lunas (uang pas)
+
+// Skenario 3:
+// Ubah data awal menjadi:
+// kasirNamaPelanggan = "Dina";
+// kasirTotalBelanja = 30000;
+// kasirHari = "rabu";
+// kasirJenisMember = "biasa";
+// kasirKodeVoucher = "";
+// kasirUangBayar = 20000;
+//
+// Hasil setelah program dijalankan:
+// Pelanggan: Dina
+// Diskon: Rp1500
+// Potongan member: Rp0
+// Promo hari: Rp0
+// Voucher tidak dipakai
+// Potongan voucher: Rp0
+// Total akhir: Rp28500
+// Status: Kurang: Rp8500
+
+
+// JAWABAN PERTANYAAN
+
+
+// 1. Urutan else if dimulai dari angka terbesar agar diskon yang sesuai bisa diperiksa terlebih dahulu; jika dibalik, kondisi >= 25000 akan terpenuhi lebih dahulu sehingga belanja Rp90000 hanya mendapat diskon 5%.
+
+// 2. switch lebih cocok untuk promo hari karena satu variabel, yaitu kasirHari, dibandingkan dengan beberapa nilai tetap seperti "jumat", "sabtu", dan "minggu".
+
+// 3. break sengaja tidak ditulis di antara case "sabtu" dan case "minggu" agar keduanya menjalankan potongan promo yang sama, yaitu Rp5000.
+
+// 4. Tiga nilai yang membuat if (namaPelanggan) bernilai false adalah string kosong (""), null, dan undefined.
+
+// 5. Jika jumlahBeli bernilai -1, if (jumlahBeli) bernilai true karena angka selain 0 bersifat truthy, sedangkan if (jumlahBeli > 0) bernilai false karena -1 tidak lebih besar dari 0.
