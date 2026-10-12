@@ -315,3 +315,42 @@ Status: ${kasirStatusPembayaran}
 // 4. Tiga nilai yang membuat if (namaPelanggan) bernilai false adalah string kosong (""), null, dan undefined.
 
 // 5. Jika jumlahBeli bernilai -1, if (jumlahBeli) bernilai true karena angka selain 0 bersifat truthy, sedangkan if (jumlahBeli > 0) bernilai false karena -1 tidak lebih besar dari 0.
+
+
+
+// TAMBAHAN PROJECT :
+
+let kasirBulan = 2;
+
+switch (kasirBulan) {
+  case 4:
+  case 6:
+  case 9:
+  case 11:
+    console.log("Bulan memiliki 30 hari");
+    break;
+
+  case 2:
+    console.log("Bulan memiliki 28 atau 29 hari");
+    break;
+
+  case 1:
+  case 3:
+  case 5:
+  case 7:
+  case 8:
+  case 10:
+  case 12:
+    console.log("Bulan memiliki 31 hari");
+    break;
+
+  default:
+    console.log("Bulan tidak valid");
+    break;
+}
+
+// Alasan:
+// Beberapa case bisa digabung tanpa break di antaranya
+// karena program akan terus berjalan ke baris berikutnya
+// sampai menemukan break. Dengan begitu, beberapa angka
+// bulan dapat menghasilkan output yang sama.
