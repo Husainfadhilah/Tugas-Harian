@@ -61,3 +61,23 @@ for (let i = 0; i < nilai.length; i++) {
   }
   console.log("-", nilai[i],"celcius");
 }
+
+//Kombinasi looping
+const daftarNilai = [78, 45, 92, -3, 88, 55, 100, 0, 67];
+let jumlah = 0;
+let valid = 0;
+let invalid = 0;
+
+for (let i = 0; i < daftarNilai.length; i++) {
+  const nilai = daftarNilai[i];
+
+  // Lewati nilai yang tidak valid (di luar rentang 0–100)
+  if (nilai < 0 || nilai > 100) {
+    console.log("Nilai tidak valid dilewati:", nilai);
+    invalid++;
+    continue;
+  }
+
+  jumlah += nilai;
+  valid++;
+}
