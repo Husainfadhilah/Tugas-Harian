@@ -40,3 +40,13 @@ do {
 
 console.log("Pengguna telah mengkonfirmasi. Melanjutkan proses...");
 
+//Menghentikan perulangan break
+for (let i = 1; i <= 50; i++) {
+  if (i === 10) {
+    console.log(
+      " posisi ke-" + i + ". di barisan",
+    );
+    break;
+  }
+  console.log("Memeriksa posisi ke-" + i);
+}
