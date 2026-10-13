@@ -30,3 +30,13 @@ while (tebakan !== angkaRahasia) {
   tebakan = Math.floor(Math.random() * 10) + 1; // Angka acak 1-10
   console.log("Percobaan ke-" + percobaan + ": menebak angka", tebakan);
 }
+
+//Pemggunaan nyata - konfirmasi
+let konfirmasi;
+
+do {
+  konfirmasi = prompt("Ketik 'ya' untuk melanjutkan:");
+} while (konfirmasi !== "aku masih epic");
+
+console.log("Pengguna telah mengkonfirmasi. Melanjutkan proses...");
+
