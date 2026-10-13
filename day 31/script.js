@@ -19,3 +19,14 @@ const pemain = ["Maul", "Arip", "Yazid", "Gusti"];
 for (let i = 0; i < pemain.length; i++) {
   console.log(i + 1 + ".", pemain[i]);
 }
+
+//Menebak angka
+let angkaRahasia = 7;
+let tebakan = 0;
+let percobaan = 0;
+
+while (tebakan !== angkaRahasia) {
+  percobaan++;
+  tebakan = Math.floor(Math.random() * 10) + 1; // Angka acak 1-10
+  console.log("Percobaan ke-" + percobaan + ": menebak angka", tebakan);
+}
