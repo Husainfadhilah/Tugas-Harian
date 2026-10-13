@@ -12,3 +12,10 @@ for (let i = 1; i <= 10; i++) {
 }
 
 console.log("Total:", hasil);
+
+//Mengakses elemen array
+const pemain = ["Maul", "Arip", "Yazid", "Gusti"];
+
+for (let i = 0; i < pemain.length; i++) {
+  console.log(i + 1 + ".", pemain[i]);
+}
