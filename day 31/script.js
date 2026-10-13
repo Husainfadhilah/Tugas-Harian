@@ -32,13 +32,13 @@ while (tebakan !== angkaRahasia) {
 }
 
 //Pemggunaan nyata - konfirmasi
-let konfirmasi;
+// let konfirmasi;
 
-do {
-  konfirmasi = prompt("Ketik 'ya' untuk melanjutkan:");
-} while (konfirmasi !== "aku masih epic");
+// do {
+//   konfirmasi = prompt("Ketik 'ya' untuk melanjutkan:");
+// } while (konfirmasi !== "aku masih epic");
 
-console.log("Pengguna telah mengkonfirmasi. Melanjutkan proses...");
+// console.log("Pengguna telah mengkonfirmasi. Melanjutkan proses...");
 
 //Menghentikan perulangan break
 for (let i = 1; i <= 50; i++) {
@@ -49,4 +49,15 @@ for (let i = 1; i <= 50; i++) {
     break;
   }
   console.log("Memeriksa posisi ke-" + i);
+}
+
+//Memfilter data array
+const nilai = [85, -5, 92, -10, 78, 60];
+
+console.log("Suhu Derajat:");
+for (let i = 0; i < nilai.length; i++) {
+  if (nilai[i] < 0) {
+    continue; 
+  }
+  console.log("-", nilai[i],"celcius");
 }
