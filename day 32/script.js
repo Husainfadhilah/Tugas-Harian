@@ -311,3 +311,25 @@ kasirProsesTransaksi();
 //        function expression baru bisa dipakai setelah barisnya.
 
 
+//Tugas Bonus
+let keranjang = ["Kopi", "Teh", "Roti"];
+
+function kasirBatalkanItem(namaMenu) {
+  let posisi = keranjang.indexOf(namaMenu);
+
+  if (posisi !== -1) {
+    keranjang.splice(posisi, 1);
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// Membatalkan menu yang ada
+console.log(kasirBatalkanItem("Teh")); // Seharusnya: true
+
+// Membatalkan menu yang tidak ada
+console.log(kasirBatalkanItem("Susu")); // Seharusnya: false
+
+// Isi keranjang setelah pembatalan
+console.log(keranjang); // Seharusnya: ["Kopi", "Roti"]
