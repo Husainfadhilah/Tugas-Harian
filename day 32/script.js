@@ -42,9 +42,32 @@ let x = tambah(2, 3);
 let y = cetakTambah(2, 3);
 console.log(x);
 console.log(y);
+console.log("----------------------------------------------------------");
 
 //JAWABAN
 //a. 5
 //b. 5
 //undifined
+
+const hitungDiskonPersen = (harga, persen = 10) => harga - (harga * persen) / 100;
+console.log(hitungDiskonPersen(50000, 20));
+console.log(hitungDiskonPersen(50000));
+
+function cekAngka(n) {
+  if (n < 0) {
+    return "negatif";
+    console.log("Baris ini muncul atau tidak?");
+  }
+  return "bukan negatif";
+}
+
+console.log(cekAngka(-5));
+console.log(cekAngka(5));
+
+//JAWABAN 
+//a. 40000
+//b. 45000
+//c. negatif
+//d. bukan negatif
+
 
