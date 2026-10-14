@@ -75,5 +75,55 @@ console.log(cekAngka(5));
 // 2. Pada Potongan B, `tambah` adalah fungsi yang mengembalikan hasil penjumlahan, sedangkan `cetakTambah` adalah fungsi yang hanya menampilkan hasil menggunakan `console.log()`. `y` bernilai `undefined` karena fungsi `cetakTambah` tidak memiliki nilai `return`.
 
 // 3. Pada Potongan C, `hitungDiskonPersen(50000)` tetap menghasilkan angka karena fungsi mengembalikan nilai menggunakan `return`. Baris `console.log("Baris ini muncul atau tidak?")` tidak tercetak jika berada setelah `return` di dalam fungsi yang sama, karena `return` langsung menghentikan eksekusi fungsi.
+console.log("---------------------------------------------------------");
+
+//LANGKAH 2
+
+let daftarBelanja = ["Kopi", "Teh", "Roti"];
+daftarBelanja.push("Susu");
+//JAWABAN
+//FIX: Seharusnya menambhakan push() untuk menambahkan elemen di belakang nya
+
+//No.2
+daftarBelanja.slice(1,1);
+console.log(daftarBelanja);
+
+
+//FIX: Seharusnya mengganti unshift dengan slice yang isinya (1,1)
+
+let adaRoti = daftarBelanja.includes("Roti");
+
+//FIX : Seharusnya menambahkan include di daftarBelanja yaitu daftarBelanja.includes("Roti");
+
+let terakhir = daftarBelanja[daftarBelanja.length];
+//seharusnya
+// let terakhir = daftarBelanja[daftarBelanja.length - 1];
+//FIX : Indeks array dimulai dari 0. Karena itu, indeks terakhir adalah jumlah elemen dikurangi 1.
+
+function hitungDiskon(harga, persen) {
+  harga - (harga * persen) / 100;
+}
+//seharusnya
+// function hitungDiskon(harga, persen) {
+//   return harga - (harga * persen) / 100;
+// }
+//FIX : return mengembalikan hasil perhitungan dari fungsi. Tanpanya, fungsi menghasilkan undefined ketika dipanggil.
+
+const hitungPajak = (subtotal) => {
+  subtotal * 0.11;
+};
+//seharusnya
+// const hitungPajak = (subtotal) => {
+//   return subtotal * 0.11;
+// };
+//FIX : Alasannya sama seperti fungsi diskon: hasil perhitungan perlu dikembalikan menggunakan return.
+
+console.log(hitungTotal(80000, 8800));
+const hitungTotal = (subtotal, pajak) => subtotal + pajak;
+//seharusnya
+// const hitungTotal = (subtotal, pajak) => subtotal + pajak;
+// console.log(hitungTotal(80000, 8800));
+//FIX : Variabel fungsi yang dideklarasikan menggunakan const belum bisa digunakan sebelum deklarasinya dijalankan.
+
 
 
