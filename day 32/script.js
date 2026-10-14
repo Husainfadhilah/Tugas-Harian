@@ -70,4 +70,10 @@ console.log(cekAngka(5));
 //c. negatif
 //d. bukan negatif
 
+//1. Pada Potongan A, `menu` dan `irisan` berbeda karena method yang digunakan menghasilkan perubahan yang berbeda. `splice()` mengubah array asli, sedangkan `slice()` tidak mengubah array asli.
+
+// 2. Pada Potongan B, `tambah` adalah fungsi yang mengembalikan hasil penjumlahan, sedangkan `cetakTambah` adalah fungsi yang hanya menampilkan hasil menggunakan `console.log()`. `y` bernilai `undefined` karena fungsi `cetakTambah` tidak memiliki nilai `return`.
+
+// 3. Pada Potongan C, `hitungDiskonPersen(50000)` tetap menghasilkan angka karena fungsi mengembalikan nilai menggunakan `return`. Baris `console.log("Baris ini muncul atau tidak?")` tidak tercetak jika berada setelah `return` di dalam fungsi yang sama, karena `return` langsung menghentikan eksekusi fungsi.
+
 
