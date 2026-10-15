@@ -24,3 +24,30 @@ console.log(Object.values(produk));
 //7. nama, harga, kategori
 //8. Kopi susu, 2000, minuman
 
+const dompet = {
+  pemilik: "Rina",
+  saldo: 50000,
+
+  belanja(jumlah) {
+    this.saldo -= jumlah;
+    return this.saldo;
+  },
+
+  cekSaldo() {
+    console.log(this.pemilik + ": Rp " + this.saldo);
+  },
+};
+
+let sisa = dompet.belanja(20000);
+console.log(sisa);
+dompet.cekSaldo();
+dompet.belanja(10000);
+dompet.cekSaldo();
+console.log(dompet.saldo);
+
+//JAWABAN POTONGAN B
+//1. 30000
+//2. Rina : Rp 30000
+//3. Rina : Rp 20000
+//4. 20000
+
