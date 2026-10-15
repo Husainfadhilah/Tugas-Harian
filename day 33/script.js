@@ -95,3 +95,61 @@ dompet.saldo di akhir bernilai 20000 karena saldo awal 50000 dikurangi 20000, la
 3. Potongan C:
 for...of pada array menghasilkan "Senin" dan "Selasa" karena mengambil nilai setiap elemen, sedangkan for...in menghasilkan 0 dan 1 karena mengambil indeks array. for...in pada object kopi mengambil nama properti beserta nilainya melalui kopi[kolom]. for...of pada string "Kopi" menghasilkan huruf satu per satu karena string bisa diiterasi. Namun, for...of pada object kopi secara langsung akan menghasilkan error karena object biasa tidak bisa langsung diiterasi menggunakan for...of.
 */
+
+
+const warung = {
+  nama: "Warung Senja",
+  saldoKas: 100000,
+
+  // FIX 1: Tambahkan this agar saldoKas merujuk ke properti object warung.
+  tambahKas(jumlah) {
+    this.saldoKas += jumlah;
+  },
+
+  // FIX 2: Tambahkan return agar sisa saldo dikembalikan.
+  ambilKas(jumlah) {
+    this.saldoKas -= jumlah;
+    return this.saldoKas;
+  },
+};
+
+warung.tambahKas(50000);
+console.log(warung.saldoKas);
+console.log(warung.ambilKas(30000));
+
+// Key dengan tanda hubung.
+// FIX 3: Gunakan kurung siku karena nama properti mengandung tanda hubung.
+const kontak = { "no-wa": "08123" };
+console.log(kontak["no-wa"]);
+
+// Hapus kataSandi dari akun.
+// FIX 4: Gunakan delete untuk benar-benar menghapus properti.
+const akun = { nama: "Rina", kataSandi: "abc123" };
+delete akun.kataSandi;
+console.log(akun);
+
+// Cetak semua isi array, satu per baris.
+// FIX 5: Gunakan for...of agar mengambil nilai array, bukan indeksnya.
+const menu = ["Kopi", "Teh", "Roti"];
+for (let item of menu) {
+  console.log(item);
+}
+
+// Cetak semua properti object.
+// FIX 6: Gunakan for...in untuk mengambil nama properti object.
+const info = { nama: "Warung Senja", kota: "Yogyakarta" };
+for (let kolom in info) {
+  console.log(kolom + ": " + info[kolom]);
+}
+
+// Daftar kunci object.
+// FIX 7: Gunakan Object.keys(), bukan Object.key().
+console.log(Object.keys(info));
+
+// Jawaban pertanyaan 3:
+const akunTes = { nama: "Rina", kataSandi: "abc123" };
+akunTes.kataSandi = undefined;
+console.log("kataSandi" in akunTes); // true
+
+delete akunTes.kataSandi;
+console.log("kataSandi" in akunTes); // false
