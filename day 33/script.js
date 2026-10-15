@@ -84,3 +84,14 @@ for (let huruf of "Kopi") {
 //p
 //i
 
+//JAWABAN ESAY
+/*
+1. Potongan A:
+produk.nama digunakan untuk mengambil nilai properti nama secara langsung, sedangkan produk[kunci] mengambil nilai berdasarkan isi variabel kunci. Keduanya menghasilkan "Kopi Susu" karena kunci berisi "nama". produk.stok menghasilkan undefined karena properti stok sudah dihapus menggunakan delete. Operator in menghasilkan true jika properti ada dan false jika tidak ada. Object.keys() mengambil semua nama properti, sedangkan Object.values() mengambil semua nilainya.
+
+2. Potongan B:
+dompet.saldo di akhir bernilai 20000 karena saldo awal 50000 dikurangi 20000, lalu dikurangi lagi 10000. Hasil belanja(10000) tidak perlu disimpan ke variabel karena method tersebut langsung mengubah saldo di dalam object. this merujuk pada object dompet yang memanggil method tersebut.
+
+3. Potongan C:
+for...of pada array menghasilkan "Senin" dan "Selasa" karena mengambil nilai setiap elemen, sedangkan for...in menghasilkan 0 dan 1 karena mengambil indeks array. for...in pada object kopi mengambil nama properti beserta nilainya melalui kopi[kolom]. for...of pada string "Kopi" menghasilkan huruf satu per satu karena string bisa diiterasi. Namun, for...of pada object kopi secara langsung akan menghasilkan error karena object biasa tidak bisa langsung diiterasi menggunakan for...of.
+*/
