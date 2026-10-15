@@ -51,3 +51,36 @@ console.log(dompet.saldo);
 //3. Rina : Rp 20000
 //4. 20000
 
+
+const hari = ["Senin", "Selasa"];
+
+for (let nilai of hari) {
+  console.log(nilai);
+}
+
+for (let indeks in hari) {
+  console.log(indeks);
+}
+
+const kopi = { nama: "Kopi", harga: 18000 };
+
+for (let kolom in kopi) {
+  console.log(kolom + ": " + kopi[kolom]);
+}
+
+for (let huruf of "Kopi") {
+  console.log(huruf);
+}
+
+//JAWABAN POTONGAN C
+//Senin
+//Selasa
+//0
+//1
+//nama: Kopi
+//harga: 18000
+//K
+//o
+//p
+//i
+
