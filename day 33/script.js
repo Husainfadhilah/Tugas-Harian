@@ -153,3 +153,19 @@ console.log("kataSandi" in akunTes); // true
 
 delete akunTes.kataSandi;
 console.log("kataSandi" in akunTes); // false
+
+
+/*
+1. Tujuh kesalahan dan perbaikannya:
+- FIX 1: saldoKas tidak menggunakan this sehingga properti object tidak dirujuk dengan benar; perbaikannya menggunakan this.saldoKas.
+- FIX 2: ambilKas tidak menggunakan return sehingga sisa saldo tidak dikembalikan; perbaikannya menambahkan return this.saldoKas.
+- FIX 3: kontak.no-wa salah karena tanda hubung dianggap sebagai operator; perbaikannya menggunakan kontak["no-wa"].
+- FIX 4: kataSandi diberi nilai undefined tetapi propertinya masih ada; perbaikannya menggunakan delete akun.kataSandi.
+- FIX 5: for...in mengambil indeks array, bukan nilai; perbaikannya menggunakan for...of.
+- FIX 6: for...of tidak dapat digunakan langsung pada object biasa; perbaikannya menggunakan for...in.
+- FIX 7: Object.key() salah karena method yang benar adalah Object.keys().
+
+2. Kesalahan yang menyebabkan error adalah kontak.no-wa karena dibaca sebagai operasi pengurangan, for...of pada object info karena object biasa tidak dapat diiterasi langsung, dan Object.key() karena method tersebut tidak tersedia. Kesalahan lain tidak langsung menyebabkan error, tetapi hasilnya salah atau tidak sesuai harapan.
+
+3. akun.kataSandi = undefined hanya mengubah nilai properti menjadi undefined, tetapi propertinya masih ada sehingga "kataSandi" in akun menghasilkan true. Sementara itu, delete akun.kataSandi menghapus properti tersebut sehingga "kataSandi" in akun menghasilkan false.
+*/
