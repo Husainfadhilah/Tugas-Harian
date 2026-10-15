@@ -169,3 +169,255 @@ console.log("kataSandi" in akunTes); // false
 
 3. akun.kataSandi = undefined hanya mengubah nilai properti menjadi undefined, tetapi propertinya masih ada sehingga "kataSandi" in akun menghasilkan true. Sementara itu, delete akun.kataSandi menghapus properti tersebut sehingga "kataSandi" in akun menghasilkan false.
 */
+
+//TUGAS PEMBUATAN KASIR
+// ============================================================
+// LANGKAH 3: Bikin Kasir Sendiri
+// (tempel bagian ini di paling bawah file, setelah Langkah 1 dan 2)
+// ============================================================
+
+const kasirKedai = {
+  nama: "Kedai Senja",
+  kota: "Yogyakarta",
+  saldoKas: 0,
+  jamOperasional: { buka: "08:00", tutup: "21:00" },
+  menu: [
+    { nama: "Kopi Susu", kategori: "minuman", harga: 18000, stok: 10 },
+    { nama: "Teh Tarik", kategori: "minuman", harga: 15000, stok: 8 },
+    { nama: "Roti Bakar", kategori: "makanan", harga: 22000, stok: 6 },
+    { nama: "Nasi Goreng", kategori: "makanan", harga: 28000, stok: 5 },
+    { nama: "Pisang Goreng", kategori: "camilan", harga: 12000, stok: 12 },
+    { nama: "Es Jeruk", kategori: "minuman", harga: 10000, stok: 10 },
+  ],
+  keranjang: [],
+
+  // Mencari harga menu. Mengembalikan 0 jika tidak ketemu.
+  cariHarga(namaMenu) {
+    for (const item of this.menu) {
+      if (item.nama === namaMenu) {
+        return item.harga;
+      }
+    }
+    return 0;
+  },
+
+  // Menambah ke keranjang jika menu ada dan stok cukup.
+  tambahKeKeranjang(namaMenu, jumlah) {
+    for (const item of this.menu) {
+      if (item.nama === namaMenu) {
+        if (item.stok >= jumlah) {
+          this.keranjang.push({ nama: namaMenu, jumlah: jumlah });
+          item.stok -= jumlah;
+          return true;
+        }
+        return false; // menu ada, tapi stok tidak cukup
+      }
+    }
+    return false; // menu tidak ditemukan
+  },
+
+  // Menghitung subtotal seluruh isi keranjang.
+  hitungSubtotal() {
+    let subtotal = 0;
+    for (const item of this.keranjang) {
+      subtotal += this.cariHarga(item.nama) * item.jumlah;
+    }
+    return subtotal;
+  },
+
+  // Mengembalikan BESAR diskon (dalam rupiah), bukan persennya.
+  hitungDiskon(subtotal) {
+    if (subtotal >= 100000) return subtotal * 0.15;
+    if (subtotal >= 50000) return subtotal * 0.1;
+    if (subtotal >= 25000) return subtotal * 0.05;
+    return 0;
+  },
+
+  // Mencetak struk, lalu menambahkan total ke saldoKas.
+  cetakStruk() {
+    const rp = (angka) => "Rp " + angka.toLocaleString("id-ID");
+    const subtotal = this.hitungSubtotal();
+    const diskon = this.hitungDiskon(subtotal);
+    const setelahDiskon = subtotal - diskon;
+    const pajak = setelahDiskon * 0.11;
+    const total = setelahDiskon + pajak;
+
+    console.log("=================================");
+    console.log("        " + this.nama.toUpperCase());
+    console.log("        " + this.kota);
+    console.log("=================================");
+
+    let nomor = 1;
+    for (const item of this.keranjang) {
+      const harga = this.cariHarga(item.nama);
+      console.log(`${nomor}. ${item.nama} x${item.jumlah} @ ${rp(harga)} = ${rp(harga * item.jumlah)}`);
+      nomor++;
+    }
+
+    console.log("---------------------------------");
+    console.log("Subtotal : " + rp(subtotal));
+    console.log("Diskon   : " + rp(diskon));
+    console.log("Pajak 11%: " + rp(pajak));
+    console.log("Total    : " + rp(total));
+    console.log("=================================");
+
+    this.saldoKas += total;
+  },
+};
+
+// ------------------------------------------------------------
+// 7. Properti dinamis (bracket notation)
+// ------------------------------------------------------------
+const namaPropertiBaru = "website";
+kasirKedai[namaPropertiBaru] = "https://kedaisenja.example";
+console.log("Ada 'website' setelah ditambah?", namaPropertiBaru in kasirKedai); // true
+delete kasirKedai[namaPropertiBaru];
+console.log("Ada 'website' setelah dihapus?", namaPropertiBaru in kasirKedai); // false
+
+// ------------------------------------------------------------
+// 8. for...in
+// ------------------------------------------------------------
+console.log("--- jamOperasional ---");
+for (const kunci in kasirKedai.jamOperasional) {
+  console.log(kunci + ": " + kasirKedai.jamOperasional[kunci]);
+}
+console.log("--- menu[0] ---");
+for (const kunci in kasirKedai.menu[0]) {
+  console.log(kunci + ": " + kasirKedai.menu[0][kunci]);
+}
+
+// ------------------------------------------------------------
+// 9. Object.keys dan Object.values
+// ------------------------------------------------------------
+console.log(Object.keys(kasirKedai.jamOperasional)); // [ 'buka', 'tutup' ]
+console.log(Object.values(kasirKedai.jamOperasional)); // [ '08:00', '21:00' ]
+
+// ------------------------------------------------------------
+// 10. Hitung huruf "a" di nama kedai (for...of pada string)
+// ------------------------------------------------------------
+let jumlahA = 0;
+for (const huruf of kasirKedai.nama) {
+  if (huruf === "a") {
+    jumlahA++;
+  }
+}
+console.log('Huruf "a" di "' + kasirKedai.nama + '":', jumlahA); // 2
+
+// ------------------------------------------------------------
+// 11. Uji skenario
+// ------------------------------------------------------------
+
+// Skenario 1: Kopi Susu x2, Roti Bakar x1  (diskon 10%)
+kasirKedai.tambahKeKeranjang("Kopi Susu", 2);
+kasirKedai.tambahKeKeranjang("Roti Bakar", 1);
+kasirKedai.cetakStruk();
+// Hasil struk:
+// Subtotal : Rp 58.000
+// Diskon   : Rp 5.800   (10%)
+// Pajak    : Rp 5.742   (11% dari 52.200)
+// Total    : Rp 57.942
+kasirKedai.keranjang = []; // kosongkan keranjang untuk pelanggan berikutnya
+
+// Skenario 2: Nasi Goreng x3, Teh Tarik x2  (diskon 15%)
+kasirKedai.tambahKeKeranjang("Nasi Goreng", 3);
+kasirKedai.tambahKeKeranjang("Teh Tarik", 2);
+kasirKedai.cetakStruk();
+// Hasil struk:
+// Subtotal : Rp 114.000
+// Diskon   : Rp 17.100  (15%)
+// Pajak    : Rp 10.659  (11% dari 96.900)
+// Total    : Rp 107.559
+kasirKedai.keranjang = [];
+
+// Kasus gagal
+console.log(kasirKedai.tambahKeKeranjang("Sate Ayam", 1)); // false (menu tidak ada)
+console.log(kasirKedai.tambahKeKeranjang("Es Jeruk", 99)); // false (jumlah melebihi stok 10)
+
+console.log("Saldo kas:", kasirKedai.saldoKas); // 165501 (57.942 + 107.559)
+
+// ------------------------------------------------------------
+// Bukti: kenapa harus this.saldoKas, bukan saldoKas
+// ------------------------------------------------------------
+try {
+  const percobaan = {
+    saldoKas: 500,
+    tanpaThis() {
+      return saldoKas; // tanpa "this"
+    },
+  };
+  percobaan.tanpaThis();
+} catch (e) {
+  console.log(e.name + ": " + e.message);
+}
+// Baris percobaan langsung (dijadikan komentar karena akan menghentikan program):
+// console.log(saldoKas);
+// Pesan error: ReferenceError: saldoKas is not defined
+
+// Bukti: for...of pada object biasa
+try {
+  for (const x of kasirKedai) {
+    console.log(x);
+  }
+} catch (e) {
+  console.log(e.name + ": " + e.message);
+}
+// Pesan error: TypeError: kasirKedai is not iterable
+
+
+//JAWABAN
+
+// 1. Beda dot notation dan bracket notation
+//    - Dot notation: nama properti ditulis langsung setelah titik.
+//      Contoh dari kodeku: kasirKedai.nama, kasirKedai.jamOperasional.buka
+//    - Bracket notation: nama properti ditulis sebagai string/ekspresi di dalam [ ].
+//      Contoh dari kodeku: kasirKedai[namaPropertiBaru] dan
+//      kasirKedai.menu[0][kunci] (di dalam for...in).
+//    Bracket notation WAJIB dipakai ketika:
+//      a) nama properti disimpan di dalam variabel (dinamis). Kalau ditulis
+//         kasirKedai.namaPropertiBaru, JavaScript mencari properti bernama
+//         harfiah "namaPropertiBaru", bukan isi variabelnya "website".
+//      b) nama properti mengandung spasi atau karakter khusus, mis. obj["nama menu"].
+//      c) nama properti berupa angka atau hasil hitungan, mis. obj[1].
+
+// 2. Kenapa this.saldoKas, bukan saldoKas?
+//    saldoKas adalah properti milik object kasirKedai, bukan variabel biasa.
+//    "this" di dalam method menunjuk ke object pemanggil (kasirKedai), sehingga
+//    this.saldoKas berarti "saldoKas milik object ini". Tanpa "this", JavaScript
+//    mencari variabel bernama saldoKas di scope function/global, dan tidak
+//    menemukannya.
+//    Buktinya ada di bagian try/catch di atas. Pesan errornya:
+//    ReferenceError: saldoKas is not defined
+
+// 3. Beda for...of dan for...in
+//    - for...of mengulang NILAI dari objek yang iterable (array, string, dst).
+//    - for...in mengulang NAMA PROPERTI (kunci) dari sebuah object.
+//    Pemakaian for...of di kodeku: for (const item of this.menu) di cariHarga,
+//    dan for (const huruf of kasirKedai.nama) saat menghitung huruf "a".
+//    Pemakaian for...in di kodeku: for (const kunci in kasirKedai.jamOperasional).
+//    Tidak bisa ditukar: jamOperasional adalah object biasa (tidak iterable),
+//    jadi for...of akan error. Sebaliknya, kalau for...in dipakai pada array menu
+//    kita hanya mendapat indeks ("0", "1", ...) berupa string, bukan data menunya.
+
+// 4. Kenapa for...of pada kasirKedai (object) error, sedangkan string dan array tidak?
+//    for...of hanya bisa dipakai pada objek iterable, yaitu yang punya method
+//    [Symbol.iterator]. Array dan string punya, object biasa tidak.
+//    Pesan error: TypeError: kasirKedai is not iterable
+
+// 5. Beda Object.keys dan Object.values
+//    Object.keys mengembalikan array berisi nama properti (kunci),
+//    Object.values mengembalikan array berisi nilai-nilainya.
+//    Dari kodeku:
+//      Object.keys(kasirKedai.jamOperasional)   -> [ 'buka', 'tutup' ]
+//      Object.values(kasirKedai.jamOperasional) -> [ '08:00', '21:00' ]
+
+// 6. Kenapa cariHarga dan hitungSubtotal harus return, sedangkan cetakStruk boleh tidak?
+//    cariHarga dan hitungSubtotal menghasilkan NILAI yang dipakai method lain:
+//    hitungSubtotal memanggil this.cariHarga(...), dan cetakStruk memakai hasil
+//    hitungSubtotal. Tanpa return, nilainya tidak keluar dari method.
+//    cetakStruk tugasnya hanya melakukan aksi (mencetak ke konsol dan menambah
+//    saldoKas), tidak ada hasil yang perlu dipakai pihak lain.
+//    Jika hitungSubtotal hanya memakai console.log, angkanya tampil di layar tetapi
+//    method mengembalikan undefined. Akibatnya, const subtotal = this.hitungSubtotal()
+//    berisi undefined, sehingga hitungDiskon(undefined) dan perhitungan pajak/total
+//    menghasilkan NaN. Struk jadi rusak dan saldoKas ikut menjadi NaN.
+
