@@ -123,6 +123,83 @@ penghitungB mulai dari 1 lagi karena setiap pemanggilan buatPenghitung membuat v
 */
 
 
+//LANGKAH 2
+
+// Cek stok. Seharusnya tercetak: Stok aman
+const stok = 10;
+if (stok > 5) {
+  // FIX: Pindahkan console.log ke dalam blok agar pesanStok bisa diakses
+  let pesanStok = "Stok aman";
+  console.log(pesanStok);
+}
+
+// Potongan 10%. Seharusnya tercetak: 45000
+function hitungPotongan(harga) {
+  const potongan = harga * 0.1;
+  return harga - potongan;
+}
+// FIX: Tampilkan hasil return fungsi, bukan variabel potongan
+console.log(hitungPotongan(50000));
+
+// Sambutan. Seharusnya tercetak: Selamat datang di Kedai Senja
+// FIX: Panggil fungsi setelah deklarasi karena menggunakan const
+const sambutan = function () {
+  return "Selamat datang di Kedai Senja";
+};
+console.log(sambutan());
+
+// Kota. Seharusnya tercetak: Yogyakarta
+let kota = "Yogyakarta";
+// FIX: Pindahkan console.log setelah deklarasi let
+console.log(kota);
+
+// Total awal 100000. Diskon 90000 hanya dipakai di dalam blok.
+// Seharusnya setelah blok, total tetap: 100000
+let total = 100000;
+// FIX: Gunakan let agar total di dalam blok memiliki scope sendiri
+if (true) {
+  let total = 90000;
+}
+console.log(total);
+
+// Saldo kas. Seharusnya setelah tambahKas(50000): 150000
+let saldoKas = 100000;
+function tambahKas(jumlah) {
+  // FIX: Hapus variabel saldoKas lokal agar saldoKas global yang ditambah
+  saldoKas += jumlah;
+}
+tambahKas(50000);
+console.log(saldoKas);
+
+// Nomor antrean. Seharusnya tercetak: 1 2 3
+function buatAntrean() {
+  // FIX: Simpan nomor di luar fungsi yang dikembalikan agar nilainya bertahan
+  let nomor = 0;
+  return function () {
+    nomor++;
+    return nomor;
+  };
+}
+const ambilNomor = buatAntrean();
+console.log(ambilNomor(), ambilNomor(), ambilNomor());
+
+// Dompet. Seharusnya setelah belanja(30000), cekSaldo() mengembalikan: 70000
+function buatDompet(saldoAwal) {
+  let saldo = saldoAwal;
+  return {
+    belanja(jumlah) {
+      saldo -= jumlah;
+    },
+    cekSaldo() {
+      // FIX: Gunakan variabel saldo dari closure, bukan this.saldo
+      return saldo;
+    },
+  };
+}
+const dompet = buatDompet(100000);
+dompet.belanja(30000);
+console.log(dompet.cekSaldo());
+
 
 
 
