@@ -244,9 +244,6 @@ bisa mengakses saldo melalui closure dengan mengembalikan saldo.
 */
 
 
-//  LANGKAH 3
-
-
 /* LANGKAH 3: BIKIN KASIR SENDIRI */
 
 // FIX: Function declaration bisa dipanggil sebelum didefinisikan
@@ -256,7 +253,7 @@ const NAMA_WARUNG = "Kedai Senja";
 const TARIF_PAJAK = 0.11;
 
 function cetakJudul() {
-  console.log(NAMA_WARUNG.toUpperCase());
+  console.log(NAMA_WARUNG.toLowerCase());
 }
 
 // Function pabrik kasir
@@ -418,6 +415,28 @@ JAWABAN PERTANYAAN
    dan tetap diingat oleh arrow function yang dikembalikan.
 */
 
+//TUGAS BONUS
 
+const fungsiLet = [];
+for (let i = 0; i < 3; i++) {
+  fungsiLet.push(() => i);
+}
+console.log(fungsiLet[0](), fungsiLet[1](), fungsiLet[2]());
+
+const fungsiVar = [];
+for (var j = 0; j < 3; j++) {
+  fungsiVar.push(() => j);
+}
+console.log(fungsiVar[0](), fungsiVar[1](), fungsiVar[2]());
+
+//HASIL FUNGSI LET
+// 0 1 2
+
+//HASIL FUNGSI VAR
+// 3 3 3
+
+// 1. Posisi pertama (let) menghasilkan 0 1 2 karena setiap putaran perulangan memiliki variabel i sendiri. Setiap fungsi mengingat nilai i saat fungsi tersebut dibuat.
+
+// 2. Posisi kedua (var) menghasilkan 3 3 3 karena semua fungsi menggunakan variabel j yang sama. Setelah perulangan selesai, nilai j menjadi 3, sehingga semua fungsi mengembalikan angka 3.
 
 
