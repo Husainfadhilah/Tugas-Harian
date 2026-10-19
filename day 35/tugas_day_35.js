@@ -32,6 +32,14 @@ if (true) {
 for (let i = 0; i < 2; i++) {
   console.log("putaran", i);
 }
+// Percobaan 1:
+// console.log(pesanBlok);
+// Error: ReferenceError: pesanBlok is not defined
+
+// Percobaan 2:
+// console.log(i);
+// Error: ReferenceError: i is not defined
+
 
 //JAWABAN
 //1. Dalam
@@ -42,3 +50,26 @@ for (let i = 0; i < 2; i++) {
 //6. putaran 0
 //7. putaran 1
 
+
+console.log(sapa());
+
+function sapa() {
+  return "Halo!";
+}
+
+console.log(warna);
+var warna = "biru";
+console.log(warna);
+
+// Percobaan 1:
+// console.log(lokasi);
+// const lokasi = "Sleman";
+
+// Percobaan 2:
+// console.log(salam());
+// const salam = function () { return "Hai"; };
+
+//JAWABAN 
+// Halo!
+// undefined
+// biru
