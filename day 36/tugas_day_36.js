@@ -75,6 +75,55 @@ console.log(warna);
 // biru
 
 
+function buatPenghitung() {
+  let hitungan = 0;
+
+  return function () {
+    hitungan++;
+    return hitungan;
+  };
+}
+
+const penghitungA = buatPenghitung();
+const penghitungB = buatPenghitung();
+
+console.log(penghitungA());
+console.log(penghitungA());
+console.log(penghitungA());
+console.log(penghitungB());
+console.log(penghitungA());
+
+//JAWABAN 
+// 1
+// 2
+// 3
+// 1
+// 4
+
+// JAWABAN DI KOMENTAR
+
+/*
+1. Pada Potongan A:
+Tiga console.log(nama) menghasilkan nilai berbeda karena setiap variabel nama berada di scope yang berbeda, yaitu "Dalam", "Luar", dan "Global".
+hitung(100) bisa memakai diskonGlobal karena variabel tersebut berada di global scope sehingga bisa diakses dari dalam fungsi.
+pesanBlok dan i error di luar blok karena let hanya bisa diakses di dalam blok tempat variabel tersebut dibuat.
+*/
+
+/*
+2. Pada Potongan B:
+sapa() bisa dipanggil sebelum didefinisikan karena function declaration mengalami hoisting.
+warna bernilai undefined karena var sudah dideklarasikan, tetapi belum diberi nilai saat dipanggil.
+lokasi dan salam error karena const tidak bisa diakses sebelum deklarasinya dijalankan.
+*/
+
+/*
+3. Pada Potongan C:
+penghitungA terus bertambah karena closure membuat fungsi tetap bisa mengakses variabel hitungan meskipun buatPenghitung sudah selesai dijalankan.
+penghitungB mulai dari 1 lagi karena setiap pemanggilan buatPenghitung membuat variabel hitungan baru dengan nilai awal 0.
+*/
+
+
+
 
 
 
