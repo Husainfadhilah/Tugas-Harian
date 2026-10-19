@@ -244,5 +244,180 @@ bisa mengakses saldo melalui closure dengan mengembalikan saldo.
 */
 
 
+//  LANGKAH 3
+
+
+/* LANGKAH 3: BIKIN KASIR SENDIRI */
+
+// FIX: Function declaration bisa dipanggil sebelum didefinisikan
+cetakJudul();
+
+const NAMA_WARUNG = "Kedai Senja";
+const TARIF_PAJAK = 0.11;
+
+function cetakJudul() {
+  console.log(NAMA_WARUNG.toUpperCase());
+}
+
+// Function pabrik kasir
+function buatKasir(namaKasir, modalAwal) {
+  // Data privat
+  let saldoKas = modalAwal;
+  let jumlahTransaksi = 0;
+  let riwayat = [];
+
+  return {
+    catatPenjualan(namaMenu, harga, jumlah) {
+      const subtotal = harga * jumlah;
+      const pajak = subtotal * TARIF_PAJAK;
+      const total = subtotal + pajak;
+
+      saldoKas += total;
+      jumlahTransaksi++;
+
+      riwayat.push({
+        namaMenu,
+        jumlah,
+        total,
+      });
+
+      return total;
+    },
+
+    ambilKas(jumlah) {
+      if (jumlah > saldoKas) {
+        return false;
+      }
+
+      saldoKas -= jumlah;
+      return true;
+    },
+
+    cekSaldo() {
+      return saldoKas;
+    },
+
+    lihatRiwayat() {
+      return riwayat.slice();
+    },
+
+    ringkasan() {
+      console.log(
+        `Kasir: ${namaKasir} | Transaksi: ${jumlahTransaksi} | Saldo: ${saldoKas}`
+      );
+    },
+  };
+}
+
+// Membuat dua kasir
+const kasirPagi = buatKasir("Rina", 100000);
+const kasirMalam = buatKasir("Dodi", 50000);
+
+// Tiga penjualan kasir pagi
+console.log("Penjualan pagi:");
+console.log(kasirPagi.catatPenjualan("Kopi", 10000, 2));
+console.log(kasirPagi.catatPenjualan("Roti", 5000, 4));
+console.log(kasirPagi.catatPenjualan("Teh", 8000, 2));
+
+// Dua penjualan kasir malam
+console.log("Penjualan malam:");
+console.log(kasirMalam.catatPenjualan("Nasi Goreng", 15000, 2));
+console.log(kasirMalam.catatPenjualan("Es Teh", 5000, 3));
+
+// Mengambil kas: satu berhasil dan satu gagal
+console.log("Ambil kas pagi:", kasirPagi.ambilKas(20000));
+// Output: true
+
+console.log("Ambil kas pagi:", kasirPagi.ambilKas(9999999));
+// Output: false
+
+// Ringkasan kedua kasir
+kasirPagi.ringkasan();
+kasirMalam.ringkasan();
+
+// Membuktikan data privat
+console.log("Property saldoKas:", kasirPagi.saldoKas);
+// Output: undefined
+
+kasirPagi.saldoKas = 999999;
+console.log("Saldo setelah mencoba mengubah:", kasirPagi.cekSaldo());
+// Output: 181600
+
+// Membuktikan salinan riwayat
+const salinanRiwayat = kasirPagi.lihatRiwayat();
+
+salinanRiwayat.push({
+  namaMenu: "Menu Percobaan",
+  jumlah: 1,
+  total: 1000,
+});
+
+console.log("Panjang salinan:", salinanRiwayat.length);
+// Output: 4
+
+console.log("Panjang riwayat asli:", kasirPagi.lihatRiwayat().length);
+// Output: 3
+
+// Function pabrik diskon
+function buatPenghitungDiskon(persen) {
+  return (harga) => harga - harga * (persen / 100);
+}
+
+const diskon10 = buatPenghitungDiskon(10);
+const diskon25 = buatPenghitungDiskon(25);
+
+console.log("Harga diskon 10%:", diskon10(80000));
+// Output: 72000
+
+console.log("Harga diskon 25%:", diskon25(80000));
+// Output: 60000
+
+// Shadowing
+const namaWarung = "Warung Global";
+
+function cekNamaWarung() {
+  const namaWarung = "Warung Lokal";
+  console.log("Di dalam fungsi:", namaWarung);
+}
+
+console.log("Di luar fungsi:", namaWarung);
+// Output: Warung Global
+
+cekNamaWarung();
+// Output: Di dalam fungsi: Warung Lokal
+
+/*
+JAWABAN PERTANYAAN
+
+1. kasirPagi.saldoKas menghasilkan undefined karena saldoKas
+   adalah variabel lokal di dalam buatKasir, bukan property object.
+   Closure membuat method tetap bisa mengakses saldoKas tersebut.
+
+2. Saldo kasirPagi dan kasirMalam terpisah karena setiap pemanggilan
+   buatKasir membuat variabel saldoKas dan data privat yang baru.
+
+3. saldoKas, jumlahTransaksi, riwayat, dan namaKasir tetap diingat
+   oleh method yang dikembalikan. Ini terjadi karena closure.
+
+4. TARIF_PAJAK bisa digunakan karena variabel itu berada di global
+   scope. Mekanisme pencarian variabel berdasarkan lingkungan
+   leksikal disebut lexical scope.
+
+5. cetakJudul bisa dipanggil sebelum didefinisikan karena function
+   declaration mengalami hoisting.
+
+   Percobaan function expression:
+   // console.log(judulPercobaan());
+   // const judulPercobaan = function () {
+   //   return "Judul";
+   // };
+   // Hasil: ReferenceError karena const belum diinisialisasi.
+
+6. diskon10 mengetahui nilai persen dari closure. Saat
+   buatPenghitungDiskon(10) dipanggil, nilai persen adalah 10
+   dan tetap diingat oleh arrow function yang dikembalikan.
+*/
+
+
 
 
