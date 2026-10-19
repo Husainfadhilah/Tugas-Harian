@@ -200,6 +200,48 @@ const dompet = buatDompet(100000);
 dompet.belanja(30000);
 console.log(dompet.cekSaldo());
 
+//LANGKAH 3
+
+
+/*
+1. Delapan kesalahan dan perbaikannya:
+
+1. pesanStok dibuat dengan let di dalam blok if, jadi console.log harus dipindahkan ke dalam blok if.
+2. Hasil hitungPotongan tidak ditampilkan dan variabel potongan tidak bisa diakses dari luar fungsi, jadi gunakan console.log(hitungPotongan(50000)).
+3. Fungsi sambutan dipanggil sebelum deklarasi const, jadi pindahkan pemanggilannya setelah deklarasi fungsi.
+4. Variabel kota dibaca sebelum deklarasi let, jadi pindahkan console.log(kota) setelah deklarasi.
+5. var total di dalam blok mengubah total di luar blok, jadi gunakan let agar total di dalam blok terpisah.
+6. saldoKas lokal di dalam tambahKas menutupi saldoKas global, jadi hapus variabel lokal dan ubah saldoKas global.
+7. Variabel nomor dibuat ulang setiap fungsi dipanggil, jadi pindahkan let nomor ke luar fungsi yang dikembalikan agar nilainya tetap bertambah.
+8. this.saldo tidak ada pada objek dompet, jadi gunakan saldo dari closure agar saldo yang benar dikembalikan.
+*/
+
+/*
+2. Kesalahan yang menyebabkan error di console:
+- Nomor 1: pesanStok tidak bisa diakses di luar blok.
+- Nomor 2: potongan tidak bisa diakses dari luar fungsi.
+- Nomor 3: sambutan dipanggil sebelum const diinisialisasi.
+- Nomor 4: kota diakses sebelum let diinisialisasi.
+
+Kesalahan yang tidak menghasilkan error, tetapi hasilnya salah:
+- Nomor 5: total menjadi 90000, bukan 100000.
+- Nomor 6: saldoKas luar tetap 100000, bukan 150000.
+- Nomor 7: hasilnya 1 1 1, bukan 1 2 3.
+- Nomor 8: hasil cekSaldo adalah undefined, bukan 70000.
+*/
+
+/*
+3. let saldoKas = 0 di dalam tambahKas membuat variabel lokal
+yang berbeda dari saldoKas di luar fungsi. Ini disebut shadowing
+atau penutupan nama variabel, sehingga saldoKas global tidak berubah.
+*/
+
+/*
+4. this.saldo menghasilkan undefined karena objek dompet tidak
+memiliki properti bernama saldo. Variabel saldo berada di dalam
+fungsi buatDompet, bukan sebagai properti objek. Fungsi cekSaldo
+bisa mengakses saldo melalui closure dengan mengembalikan saldo.
+*/
 
 
 
